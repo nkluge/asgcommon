@@ -24,25 +24,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.LinkedList;
 
-/*
- * Copyright (C) 2012 - 2015 Norman Kluge
- * 
- * This file is part of ASGResyn.
- * 
- * ASGResyn is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * ASGResyn is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with ASGResyn.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -85,9 +66,13 @@ public class BreezeNetlist extends AbstractBreezeNetlist {
 								continue;
 							}
 							File newbreeze = new File(file.getParentFile(), str + FileHelper.getFileEx(Filetype.breeze));
-							if(!BreezeNetlist.create(newbreeze, skipUndefinedComponents, skipSubComponents, project)) {
-								logger.error("Could not create Breeze netlist for " + newbreeze);
-								return false;
+							if(newbreeze.exists()) {
+								if(!BreezeNetlist.create(newbreeze, skipUndefinedComponents, skipSubComponents, project)) {
+									logger.error("Could not create Breeze netlist for " + newbreeze);
+									return false;
+								}
+							} else {
+								logger.warn("Importfile " + str + " not found");
 							}
 						}
 					} else if(ae instanceof BreezePartElement) {
