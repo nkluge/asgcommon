@@ -58,6 +58,9 @@ public abstract class Invoker {
 	protected ProcessReturn invoke(String[] cmd, String[] params, int timeout) {
 		return invoke(cmd, Arrays.asList(params), new File(workingdir), timeout);
 	}
+	protected ProcessReturn invoke(String[] cmd, List<String> params, int timeout) {
+		return invoke(cmd, params, new File(workingdir), timeout);
+	}
 	protected ProcessReturn invoke(String[] cmd, List<String> params) {
 		return invoke(cmd, params, new File(workingdir), 0);
 	}
