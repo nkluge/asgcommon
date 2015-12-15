@@ -84,6 +84,15 @@ public class LoggerHelper {
 		return logger;
 	}
 	
+	public static void setLogLevel(Logger logger, Level level) {
+		LoggerContext context = (LoggerContext) LogManager.getContext(false);
+		Configuration config = context.getConfiguration();
+	    LoggerConfig loggerConfig = new LoggerConfig();
+	    loggerConfig.setLevel(level);
+	    config.addLogger(logger.getName(), loggerConfig);
+	    context.updateLoggers(config);
+	}
+	
 	/**
 	 * Formats the runtime for output
 	 * @param time
