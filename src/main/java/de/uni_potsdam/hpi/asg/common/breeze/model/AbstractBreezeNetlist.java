@@ -114,6 +114,10 @@ public abstract class AbstractBreezeNetlist {
 		return ports;
 	}
 
+	public Map<Integer, HSChannel> getChannelList() {
+		return channelList;
+	}
+
 	public HSChannel getChan(int id, int width, DataType datatype, ComponentInst inst, HSChannelConnection type) {
 		HSChannel chan = channelList.containsKey(id) ? channelList.get(id) : new HSChannel(id, width, datatype);
 		switch(type) {
