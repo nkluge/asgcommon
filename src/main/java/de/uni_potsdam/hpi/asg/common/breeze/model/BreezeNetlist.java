@@ -45,6 +45,20 @@ public class BreezeNetlist extends AbstractBreezeNetlist {
 		super(name, project);
 	}
 
+	public static boolean isBreezeFile(File file) {
+		try {
+			FileReader filereader = new FileReader(file.getCanonicalFile());
+			BreezeParser parser = new BreezeParser(filereader);
+			parser.ParseBreezeNet();
+			return true;
+		} catch(ParseException e) {
+			return false;
+		} catch(Exception e) {
+			logger.error("Something went wrong with file " + file.getAbsolutePath());
+			return false;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static boolean create(File file, boolean skipUndefinedComponents, boolean skipSubComponents, BreezeProject project) {
 		String newfilename = "orig_" + file.getName();

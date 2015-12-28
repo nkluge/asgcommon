@@ -49,21 +49,23 @@ public class HSComponentInst extends ComponentInst implements Comparable<HSCompo
 	private AbstractHSComponent				comp;
 	private Map<Integer, List<HSChannel>>	chanmap;
 	private LinkedList<Object>				bechans;
+	private SourceInformation				sourceInfo;
 
 	private int newId;
 
-	protected HSComponentInst(int id, AbstractBreezeNetlist netlist, HSComponentType type, AbstractHSComponent comp) {
+	protected HSComponentInst(int id, AbstractBreezeNetlist netlist, HSComponentType type, AbstractHSComponent comp, SourceInformation sourceInfo) {
 		super(id, netlist);
 		this.chanmap = new HashMap<Integer, List<HSChannel>>();
 		this.type = type;
 		this.comp = comp;
 		this.newId = id;
+		this.sourceInfo = sourceInfo;
 	}
 
-	public static HSComponentInst create(int id, LinkedList<Object> bechans, HSComponentType type, Channels chans, AbstractBreezeNetlist netlist, AbstractHSComponent comp) {
-		HSComponentInst retVal = new HSComponentInst(id, netlist, type, comp);
+	public static HSComponentInst create(int id, LinkedList<Object> bechans, HSComponentType type, Channels chans, AbstractBreezeNetlist netlist, AbstractHSComponent comp, SourceInformation sourceInfo) {
+		HSComponentInst retVal = new HSComponentInst(id, netlist, type, comp, sourceInfo);
 		retVal.bechans = bechans;
-
+		
 		int i = 0;
 		for(Object o : bechans) {
 			Channel xmlchan = chans.getChannel(i);
@@ -339,5 +341,8 @@ public class HSComponentInst extends ComponentInst implements Comparable<HSCompo
 
 	public void setNewId(int newId) {
 		this.newId = newId;
+	}
+	public SourceInformation getSourceInfo() {
+		return sourceInfo;
 	}
 }

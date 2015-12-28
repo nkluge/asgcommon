@@ -19,8 +19,11 @@ package de.uni_potsdam.hpi.asg.common.breeze.model;
  * along with ASGCommon.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.File;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +32,7 @@ import de.uni_potsdam.hpi.asg.common.breeze.model.xml.Parameter;
 import de.uni_potsdam.hpi.asg.common.breeze.parser.breezefile.BreezeComponentElement;
 
 /**
- * Represents a handshake component 
+ * Represents a handshake component
  * (e.g. BrzVariable or BrzCallMux)
  * 
  */
@@ -64,7 +67,16 @@ public abstract class AbstractHSComponent {
 	}
 
 	protected HSComponentInst internalCreateInstanceInst(BreezeComponentElement be, AbstractBreezeNetlist netlist, HSComponentType type) {
-		HSComponentInst inst = HSComponentInst.create(be.getID(), be.channels, type, comp.getChannels(), netlist, this);
+		SourceInformation sinfo = null;
+		if(be.get(0) instanceof LinkedList<?>) {
+			@SuppressWarnings("unchecked")
+			LinkedList<Object> data = (LinkedList<Object>)be.get(0);
+			if(data.get(1) instanceof Integer && data.get(2) instanceof Integer && data.get(3) instanceof String) {
+				sinfo = new SourceInformation((Integer)data.get(1), (Integer)data.get(2), new File(((String)data.get(3)).replace("\"", "")));
+			}
+		}
+
+		HSComponentInst inst = HSComponentInst.create(be.getID(), be.channels, type, comp.getChannels(), netlist, this, sinfo);
 		if(inst == null) {
 			return null;
 		}
@@ -72,6 +84,7 @@ public abstract class AbstractHSComponent {
 		if(!instances.containsKey(netlist)) {
 			instances.put(netlist, new ArrayList<HSComponentInst>());
 		}
+
 		instances.get(netlist).add(inst);
 		return inst;
 	}
