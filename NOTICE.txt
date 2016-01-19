@@ -1,5 +1,5 @@
 ASGCommon
-Copyright (C) 2004-2015 Universitaet Augsburg, Hasso-Plattner-Institut fuer Softwaresystemtechnik GmbH
+Copyright (C) 2004-2016 Universitaet Augsburg, Hasso-Plattner-Institut fuer Softwaresystemtechnik GmbH
 
 This product includes software developed at Universitaet Augsburg.
 The Software developed and owned by the Universitaet Augsburg is licensed under the GNU GENERAL PUBLIC LICENSE Version 3 (http://www.fsf.org/licensing/licenses/gpl-3.0.html) ("GPL") to all third parties and that license, as required by the GPL, is included in the LICENSE.txt file.
@@ -18,3 +18,8 @@ args4j v2.0.29
 http://args4j.kohsuke.org/
 Copyright (C) 2003-2014 Kohsuke Kawaguchi
 Licensed under the MIT license
+
+Apache Commons Lang v3.4
+https://commons.apache.org/proper/commons-lang/
+Copyright 2001-2015 The Apache Software Foundatio
+Licensed under Apache License, Version 2.0

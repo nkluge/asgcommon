@@ -1,7 +1,7 @@
 package de.uni_potsdam.hpi.asg.common.io;
 
 /*
- * Copyright (C) 2012 - 2015 Norman Kluge
+ * Copyright (C) 2012 - 2016 Norman Kluge
  * 
  * This file is part of ASGCommon.
  * 
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -154,7 +155,13 @@ public abstract class Invoker {
 		if(cmd == null) {
 			return null;
 		}
-		cmd = cmd.replaceAll("\\$BASEDIR", System.getProperty("basedir"));
-		return cmd.split(" "); 
+		
+		String basedir = System.getProperty("basedir");
+		if(SystemUtils.IS_OS_WINDOWS) {
+			basedir = basedir.replaceAll("\\\\", "/");
+		}
+		
+		cmd = cmd.replaceAll("\\$BASEDIR", basedir);
+		return cmd.split(" ");
 	}
 }
