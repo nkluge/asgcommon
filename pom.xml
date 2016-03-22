@@ -51,6 +51,7 @@ along with ASGcommon.  If not, see <http://www.gnu.org/licenses/>.
 				<includes>
 					<include>LICENSE.txt</include>
 					<include>NOTICE.txt</include>
+					<include>README.md</include>
 				</includes>
 			</resource>
 			<resource>
