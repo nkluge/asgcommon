@@ -1,4 +1,4 @@
-ASGCommon
+ASGcommon
 Copyright (C) 2004-2016 Universitaet Augsburg, Hasso-Plattner-Institut fuer Softwaresystemtechnik GmbH
 
 This product includes software developed at Universitaet Augsburg.
