@@ -20,7 +20,7 @@ package de.uni_potsdam.hpi.asg.common.breeze.model.xml;
  */
 
 import java.io.File;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -51,8 +51,8 @@ public class Components {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Components.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			if(filename == null || filename.equals("")) {
-				URL url = Components.class.getResource(injarfilename);
-				return (Components)jaxbUnmarshaller.unmarshal(url);
+				InputStream inputStream = Components.class.getResourceAsStream(injarfilename);
+				return (Components)jaxbUnmarshaller.unmarshal(inputStream);
 			} else {
 				File file = new File(filename);
 				if(file.exists()) {
