@@ -144,5 +144,10 @@ along with ASGcommon.  If not, see <http://www.gnu.org/licenses/>.
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.53</version>
+		</dependency>
 	</dependencies>
 </project>
