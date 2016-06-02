@@ -49,16 +49,19 @@ public abstract class SimpleRemoteOperationWorkflow {
     public boolean run(Set<String> uploadfiles, Set<String> execScripts) {
         try {
             if(!connect()) {
+                logger.error("Connecting to host failed");
                 return false;
             }
             if(!upload(uploadfiles)) {
+                logger.error("Uploading files failed");
                 return false;
             }
             if(!execute(execScripts)) {
+                logger.error("Executing scripts failed");
                 return false;
             }
-
             if(!download()) {
+                logger.error("Downloading files failed");
                 return false;
             }
         } finally {
@@ -120,6 +123,7 @@ public abstract class SimpleRemoteOperationWorkflow {
         for(String str : execScripts) {
             code = RunSHScript.run(session, str, sftpcon.getDirectory());
             if(!executeCallBack(str, code)) {
+                logger.error("Running script " + str + " failed");
                 return false;
             }
         }
