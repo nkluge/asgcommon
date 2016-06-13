@@ -35,6 +35,8 @@ public class SyncTool {
     private String libraries;
     @XmlElement(name = "postcompilecmd")
     private List<String> postCompileCmds;
+    @XmlElement(name = "veriloginclude")
+    private List<String> verilogIncludes;
     //@formatter:on
 
     public String getLibraries() {
@@ -47,5 +49,9 @@ public class SyncTool {
 
     public List<String> getPostCompileCmds() {
         return postCompileCmds;
+    }
+
+    public List<String> getVerilogIncludes() {
+        return verilogIncludes;
     }
 }
