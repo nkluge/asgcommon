@@ -32,7 +32,16 @@ public class Balsa {
     private String tech;
 
     @Override
+    @Deprecated
     public String toString() {
         return tech + "/" + style;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public String getTech() {
+        return tech;
     }
 }
