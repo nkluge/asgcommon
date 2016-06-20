@@ -22,6 +22,7 @@ package de.uni_potsdam.hpi.asg.common.io.remote;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
@@ -46,7 +47,7 @@ public abstract class SimpleRemoteOperationWorkflow {
         this.subdir = subdir;
     }
 
-    public boolean run(Set<String> uploadfiles, Set<String> execScripts) {
+    public boolean run(Set<String> uploadfiles, List<String> execScripts) {
         try {
             if(!connect()) {
                 logger.error("Connecting to host failed");
@@ -117,7 +118,7 @@ public abstract class SimpleRemoteOperationWorkflow {
         return true;
     }
 
-    private boolean execute(Set<String> execScripts) {
+    private boolean execute(List<String> execScripts) {
         logger.info("Running scripts");
         int code = -1;
         for(String str : execScripts) {
