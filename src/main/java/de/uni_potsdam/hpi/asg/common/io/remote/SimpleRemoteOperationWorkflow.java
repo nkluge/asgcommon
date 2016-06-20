@@ -48,6 +48,10 @@ public abstract class SimpleRemoteOperationWorkflow {
     }
 
     public boolean run(Set<String> uploadfiles, List<String> execScripts) {
+        return run(uploadfiles, execScripts, WorkingdirGenerator.getInstance().getWorkingdir(), true);
+    }
+
+    public boolean run(Set<String> uploadfiles, List<String> execScripts, String targetfolder, boolean remove) {
         try {
             if(!connect()) {
                 logger.error("Connecting to host failed");
@@ -61,7 +65,7 @@ public abstract class SimpleRemoteOperationWorkflow {
                 logger.error("Executing scripts failed");
                 return false;
             }
-            if(!download()) {
+            if(!download(targetfolder, remove)) {
                 logger.error("Downloading files failed");
                 return false;
             }
@@ -110,9 +114,9 @@ public abstract class SimpleRemoteOperationWorkflow {
         return true;
     }
 
-    private boolean download() {
+    private boolean download(String targetfolder, boolean remove) {
         logger.info("Downloading files");
-        if(!sftpcon.downloadFiles(session, WorkingdirGenerator.getInstance().getWorkingdir(), true)) {
+        if(!sftpcon.downloadFiles(session, targetfolder, remove)) {
             return false;
         }
         return true;
