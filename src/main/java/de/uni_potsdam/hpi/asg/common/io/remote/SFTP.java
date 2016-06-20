@@ -62,7 +62,7 @@ public class SFTP {
             ChannelSftp channel = (ChannelSftp)session.openChannel("sftp");
             channel.connect();
 
-            String newTarget = newTargetBase + Integer.toString(tmpnum++);
+            String newTarget = newTargetBase;
             boolean mkdirsuccess = false;
             while(!mkdirsuccess) {
                 try {
